@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import android.view.View;
 import android.widget.AdapterView;
+import android.net.Uri;
 
 
 
@@ -74,18 +75,29 @@ public class MainActivity extends ActionBarActivity implements SwipeRefreshLayou
         // Tonyoh: click on items to get pdf
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Intent i = new Intent(MainActivity.this, MainActivity.class);  // put the class for the new activity instead of MainActivity.class
-                startActivity(i);
+
+                if(id == 0)
+                {
+                  //  Intent i = new Intent(MainActivity.this, MainActivity.class);  // put the class for the new activity instead of MainActivity.class
+                  //  startActivity(i);
+                  //  overridePendingTransition(R.anim.slide_in, R.anim.slide_out);
+                    String url = "http://www.gamerng.com/vendome/150629%20Vendome%20Daum%20Kakao%20035720%20KS.pdf";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
+
+
             }
         });
+        //
+
+
 
 
 
 
         swipeRefreshLayout.setOnRefreshListener(this);
-
-
-
                 /**
                  * Showing Swipe Refresh animation on activity create
                  * As animation won't start on onCreate, post runnable is used
